@@ -54,14 +54,14 @@ namespace impl
         printf("%s\n", result.c_str());
     }
 
-    // template<typename T, typename... Args,
-    // std::enable_if<std::is_same_v<T,Args> && ...>::type * = nullptr>
-    // print_ip(std::tuple<T,Args> arg)
-    // {
-    //     int a = sizeof(arg);
-    //     a = a+1;
-    //     printf("tuple\n");
-    // }
+    template<typename T, typename... Args,
+    std::enable_if<std::is_same_v<T,Args> && ...>::type * = nullptr>
+    print_ip(std::tuple<T,Args> arg)
+    {
+        int a = sizeof(arg);
+        a = a+1;
+        printf("tuple\n");
+    }
 }
 
 template<typename T>
@@ -81,7 +81,7 @@ int main(/*int argc, char const *argv[]*/)
     print_ip( std::string{"Hello, World!"} ); // Hello, World!
     print_ip( std::vector<int>{100, 200, 300, 400} ); // 100.200.300.400
     print_ip( std::list<short>{400, 300, 200, 100} ); // 400.300.200.100
-    //print_ip( std::make_tuple(123, 456, 789, 0) ); // 123.456.789.0
+    print_ip( std::make_tuple(123, 456, 789, 0) ); // 123.456.789.0
 
     return 0;
 }
